@@ -1,0 +1,14 @@
+# Node modules
+node_modules/
+
+# Parcel cache
+.parcel-cache/
+
+# Build output
+dist/
+
+# Env files (if any)
+.env
+
+# Mac system files
+.DS_Store
