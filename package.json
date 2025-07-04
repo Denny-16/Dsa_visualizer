@@ -11,6 +11,8 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
     "@tailwindcss/postcss": "^4.1.11",
+    "dotenv": "^17.0.1",
+    "openai": "^5.8.2",
     "parcel": "^2.15.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -18,6 +20,8 @@
     "react-router-dom": "^6.20.1",
     "tailwindcss": "^4.1.11"
   },
- 
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "buffer": "^6.0.3"
+  }
 }
