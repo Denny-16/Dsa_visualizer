@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Components/Home";
 import ArrayVisualizer from "./Components/Array/ArrayVisualizer";
-import SortVisualizer from "./Components/Array/SortVisualizer";
+import ProblemDisplay from "./Components/Array/ProblemDisplay";
 import AISection from "./Components/AISection"; // 👈 import it
 
 export default function App() {
@@ -18,7 +18,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Array" element={<ArrayVisualizer />} />
-            <Route path="/Array/:model" element={<SortVisualizer />} />
+            <Route path="/Array/:model" element={<ProblemDisplay />} />
           </Routes>
         </div>
       </div>
