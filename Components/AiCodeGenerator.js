@@ -1,17 +1,18 @@
-// Components/AiCodeGenerator.js
-import OpenAI from "openai";
-
-// ⚠️ Never expose API keys like this in production!
-const openai = new OpenAI({
-  apiKey: "sk-REPLACE_WITH_YOUR_REAL_KEY", // Put this in a .env if using backend
-  dangerouslyAllowBrowser: true, // Required if you're using API key directly in frontend
-});
-
 export async function generateCode(prompt) {
-  const response = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
-    messages: [{ role: "user", content: prompt }],
-  });
+  try {
+    const response = await fetch("http://localhost:5000/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt }),
+    });
 
-  return response.choices[0]?.message?.content.trim();
+    const data = await response.json();
+
+    return data.code; // 👈 Must match backend response key
+  } catch (err) {
+    console.error("❌ Error fetching code:", err);
+    return "Error: " + err.message;
+  }
 }

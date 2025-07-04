@@ -1,35 +1,33 @@
-// Components/AISection.js
 import { useState } from "react";
 import { generateCode } from "./AiCodeGenerator";
 
-export default function AISection() {
-  const [input, setInput] = useState("");
+export default function AISection({ prompt }) {
   const [output, setOutput] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleClick = async () => {
-    const code = await generateCode(input);
-    setOutput(code);
-  };
+  async function handleGenerate() {
+    setLoading(true);
+    try {
+      const result = await generateCode(prompt);
+      setOutput(result);
+    } catch (err) {
+      setOutput("⚠️ Error fetching code: " + err.message);
+    }
+    setLoading(false);
+  }
 
   return (
-    <div className="text-center p-4">
-      <h2 className="text-xl font-bold">AI Code Generator</h2>
-      <textarea
-        className="border p-2 w-full my-2"
-        placeholder="Enter your algorithm prompt here..."
-        rows={3}
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      ></textarea>
+    <div className="p-4">
+      <h2 className="text-xl font-bold mb-2">AI Code Generator</h2>
       <button
-        className="bg-blue-600 text-white px-4 py-2 rounded"
-        onClick={handleClick}
+        className="bg-blue-500 text-white px-4 py-2 rounded"
+        onClick={handleGenerate}
       >
-        Generate Code
+        {loading ? "Generating..." : "Generate Code"}
       </button>
       {output && (
-        <pre className="mt-4 p-2 bg-gray-200 rounded text-left overflow-x-auto whitespace-pre-wrap">
-          {output}
+        <pre className="bg-black text-green-300 mt-4 p-3 rounded whitespace-pre-wrap">
+          <code>{output}</code>
         </pre>
       )}
     </div>
